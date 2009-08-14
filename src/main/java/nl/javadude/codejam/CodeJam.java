@@ -11,8 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import nl.javadude.codejam.gcj08.qualify.SavingTheUniverse;
-
 /**
  * Main class that reads an input file, executes an Algorithm and writes an output file.
  * @author ajvanerp
@@ -20,6 +18,7 @@ import nl.javadude.codejam.gcj08.qualify.SavingTheUniverse;
  */
 public class CodeJam {
 	private static File inputFile;
+	static Algorithm a;
 	/**
 	 * @param args
 	 * @throws Exception 
@@ -33,8 +32,6 @@ public class CodeJam {
 		
 		inputFile = new File(args[0]);
 		BufferedReader input = readInput(inputFile);
-		
-		Algorithm a = new SavingTheUniverse();
 		
 		List<String> outputLines = a.run(input);
 		writeOutput(outputLines);

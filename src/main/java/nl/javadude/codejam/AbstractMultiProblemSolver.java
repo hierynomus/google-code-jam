@@ -25,11 +25,19 @@ public abstract class AbstractMultiProblemSolver<P extends Problem> implements A
 	protected abstract List<String> solveProblem(P problem);
 	protected abstract P readProblem(BufferedReader lines, int problemNumber) throws Exception;
 	
-	protected void readLinesToList(BufferedReader lines, int nrOfLines, List<String> list) throws IOException {
+	protected void readLinesToList(BufferedReader lines, int nrOfLines, final List<String> list) throws IOException {
+		readLines(lines, nrOfLines, new Closure() {
+			public void execute(String string) {
+				list.add(string);
+			}
+		});
+	}
+	
+	protected void readLines(BufferedReader lines, int nrOfLines, Closure closure) throws IOException {
 		for (int i = 0; i < nrOfLines; i++) {
 			String line = lines.readLine();
 			if (line == null) throw new IllegalStateException ("Could not read enough lines");
-			list.add(line);
+			closure.execute(line);
 		}
 	}
 	
