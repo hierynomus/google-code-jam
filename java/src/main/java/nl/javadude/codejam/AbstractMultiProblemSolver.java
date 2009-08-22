@@ -46,4 +46,24 @@ public abstract class AbstractMultiProblemSolver<P extends Problem> implements A
 		if (line == null) throw new IllegalStateException("Could not read line to int");
 		return Integer.parseInt(line);
 	}
+	
+	protected int[] readLineAsIntArray(BufferedReader lines) throws IOException {
+		String line = lines.readLine();
+		String[] split = line.split(" ");
+		int[] result = new int[split.length];
+		for (int i = 0; i < split.length; i++) {
+			result[i] = Integer.parseInt(split[i]);
+		}
+		return result;
+	}
+
+	protected long[] readLineAsLongArray(BufferedReader lines) throws IOException {
+		String line = lines.readLine();
+		String[] split = line.split(" ");
+		long[] result = new long[split.length];
+		for (int i = 0; i < split.length; i++) {
+			result[i] = Long.parseLong(split[i]);
+		}
+		return result;
+	}
 }
