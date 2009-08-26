@@ -15,6 +15,10 @@ class GoogleCodeHelper(val iterator : Iterator[String]) {
 		nextStringArray map (_.toInt)  
 	}
 
+	def nextLongArray : Array[Long] = {
+		nextStringArray map (_.toLong)  
+	}
+		
  	def nextStringArray : Array[String] = {
 		trimmedLine split " "  
 	}

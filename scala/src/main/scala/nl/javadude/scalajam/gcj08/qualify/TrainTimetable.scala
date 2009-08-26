@@ -6,16 +6,24 @@ object TrainTimetable extends CodeJam {
 
 	def solveProblem(reader : Iterator[String]) = {
 		var aNeeded, bNeeded = 0
+		var aPresent, bPresent = List[Int]()
 		val turnaround = reader nextInt
 		val nrTrips = reader nextIntArray
-		var trips = new ListBuffer[(Int, Int, String)]()
-		trips ++ (for (i <- 1 to nrTrips(0); trip = reader nextStringArray) yield (toTime(trip(0)), toTime(trip(1)) + turnaround, "a")) 
-		trips ++ (for (i <- 1 to nrTrips(1); trip = reader nextStringArray) yield (toTime(trip(0)), toTime(trip(1)) + turnaround, "b")) 
-		""
+		var trips = List[(Int, Int, String)]()
+		trips ++= (for (i <- 1 to nrTrips(0); trip = reader nextStringArray) yield (toTime(trip(0)), toTime(trip(1)) + turnaround, "a"))
+		trips ++= (for (i <- 1 to nrTrips(1); trip = reader nextStringArray) yield (toTime(trip(0)), toTime(trip(1)) + turnaround, "b"))
+		trips = trips sort (_._1 < _._1)
+		for {
+			val trip <- trips
+			if (trip._3 == "a") {
+				
+			}
+		}
+  ""
 	}
  
 	def toTime(s:String) = {
 		val split = s split ":"
-		(split(0).toInt * 60) + split(1)
+		(split(0).toInt * 60) + split(1).toInt
 	}
 }
