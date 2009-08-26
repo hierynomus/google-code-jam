@@ -6,6 +6,7 @@ object MinimumScalarProduct extends CodeJam {
 		reader next
 		val ar1 = reader.nextLongArray.toList.sort (_ < _).map (BigDecimal(_))
 		val ar2 = reader.nextLongArray.toList.sort (_ > _).map (BigDecimal(_))
-		(for (x <- ar1; y <- ar2) yield (x * y)) reduceLeft (_ + _) toString
+		val xx = (ar1 zip ar2) map (t => t._1 * t._2)
+		xx reduceLeft (_ + _) toString
 	}
 }
