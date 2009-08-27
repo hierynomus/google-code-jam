@@ -13,12 +13,12 @@ object TrainTimetable extends CodeJam {
 		trips ++= (for (i <- 1 to nrTrips(0); trip = reader nextStringArray) yield (toTime(trip(0)), toTime(trip(1)) + turnaround, "a"))
 		trips ++= (for (i <- 1 to nrTrips(1); trip = reader nextStringArray) yield (toTime(trip(0)), toTime(trip(1)) + turnaround, "b"))
 		trips = trips sort (_._1 < _._1)
-		for {
-			val trip <- trips
-			if (trip._3 == "a") {
-				
-			}
-		}
+//		for {
+//			val trip <- trips
+//			if (trip._3 == "a") {
+//				
+//			}
+//		}
   ""
 	}
  
