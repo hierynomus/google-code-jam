@@ -1,8 +1,7 @@
-package nl.javadude.scalajam
+package nl.javadude.scalajam.gcj08.round1c
 
 import org.scalatest._
 import org.scalatest.junit.JUnit3Suite
-import gcj08.round1c._
 
 class Round1cTest extends JUnit3Suite {
 
