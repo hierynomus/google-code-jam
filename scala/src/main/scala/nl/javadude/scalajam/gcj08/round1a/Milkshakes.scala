@@ -1,6 +1,9 @@
 package nl.javadude.scalajam.gcj08.round1a
 import nl.javadude.scalajam.utils.GoogleCodeHelper._
 
+/**
+ * VERIFIED against Google Code Jam
+ */
 object Milkshakes extends CodeJam {
 	def solveProblem(reader : Iterator[String]) : String = {
 		val flavours : Array[Boolean] = new Array[Boolean](reader nextInt)

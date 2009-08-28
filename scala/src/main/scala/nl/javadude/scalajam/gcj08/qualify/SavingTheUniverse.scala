@@ -1,6 +1,9 @@
 package nl.javadude.scalajam.gcj08.qualify
 import nl.javadude.scalajam.utils.GoogleCodeHelper._
 
+/**
+ * VERIFIED against Google Code Jam
+ */
 object SavingTheUniverse extends CodeJam {
 
   override def solveProblem(reader: Iterator[String]) : String = {

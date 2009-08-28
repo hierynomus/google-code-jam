@@ -1,6 +1,9 @@
 package nl.javadude.scalajam.gcj08.round1a
 import nl.javadude.scalajam.utils.GoogleCodeHelper._
 
+/**
+ * VERIFIED against Google Code Jam
+ */
 object MinimumScalarProduct extends CodeJam {
 	def solveProblem(reader : Iterator[String]) = {
 		reader next

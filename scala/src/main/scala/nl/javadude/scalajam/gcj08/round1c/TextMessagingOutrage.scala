@@ -2,6 +2,9 @@ package nl.javadude.scalajam.gcj08.round1c
 
 import nl.javadude.scalajam.utils.GoogleCodeHelper._
 
+/**
+ * VERIFIED against Google Code Jam
+ */
 object TextMessagingOutrage extends CodeJam {
 	def solveProblem(reader:Iterator[String]) : String = {
 		val keys = reader.nextIntArray(1)
