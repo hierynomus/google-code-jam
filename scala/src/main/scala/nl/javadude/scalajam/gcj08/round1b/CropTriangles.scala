@@ -1,6 +1,9 @@
 package nl.javadude.scalajam.gcj08.round1b
 import nl.javadude.scalajam.utils.GoogleCodeHelper._
 
+/**
+ * @author Jeroen van Erp - jeroen at hierynomus.com
+ */
 object CropTriangles extends CodeJam {
 	def solveProblem(reader:Iterator[String]) : String = {
 		val ar = reader.nextLongArray
