@@ -7,21 +7,25 @@ import nl.javadude.scalajam.utils.GoogleCodeHelper._
 object CropTriangles extends CodeJam {
 	def solveProblem(reader:Iterator[String]) : String = {
 		val ar = reader.nextLongArray
-		var x = ar(5)
-		var y = ar(6)
-		var trees = Array.make(10, 0L)
+		val (n, a, b, c, d, x0, y0, m) = (ar(0), ar(1), ar(2), ar(3), ar(4), ar(5), ar(6), ar(7))
+		var x = x0
+		var y = y0
+		var trees : Array[Long] = Array.make(9, 0L)
 		var i = 0
-		while (i < ar(0)) {
-			trees(((x%3)*3).toInt + (y%3).toInt) += 1
-			x = (ar(1) * x + ar(2)) % ar(7)
-			y = (ar(3) * y + ar(4)) % ar(7)
+		while (i < n) {
+			trees((((x % 3) * 3) + (y % 3)).toInt) += 1
+			x = (a * x + b) % m
+			y = (c * y + d) % m
 			i += 1
 		}
-  
-		((for (val t1 <- 0 to 9; val t2 <- 0 to 9 if t2 > t1; val t3 <- 0 to 9 if t3 > t2)
-			yield (t1, t2, t3))
-			filter (t => (t._1/3 + t._2/3 + t._3/3) % 3 == 0 && (t._1%3 + t._2%3 + t._3%3) % 3 == 0)).
-			map(t => trees(t._1.toInt) + trees(t._2.toInt) + trees(t._3.toInt)).reduceLeft(_+_).toString
+
+		val treesInSameClass = 0 until 9 map (x => trees(x) * (trees(x)-1) * (trees(x)-2) / 6) // N! / 3!
+
+		val triples = for (val t1 <- 0 until 9; val t2 <- (t1 + 1) until 9; val t3 <- (t2 + 1) until 9) yield (t1, t2, t3)
+		val filtered = triples.filter (t => (t._1/3 + t._2/3 + t._3/3) % 3 == 0 && (t._1%3 + t._2%3 + t._3%3) % 3 == 0)
+		val nrTrees = filtered.map(t => trees(t._1) * trees(t._2) * trees(t._3))
+
+		nrTrees.concat(treesInSameClass).reduceLeft(_+_).toString
 	}
 }
 
