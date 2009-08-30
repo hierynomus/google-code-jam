@@ -11,4 +11,9 @@ class Round1cTest extends CodeJamTest {
 		TextMessagingOutrage.main(Array("src/test/resources/gcj08/round1c/A-large-practice.in"))
 		check("src/test/resources/gcj08/round1a/A-large-practice.in")
 	}
+ 
+	def testIncreasingSpeedLimits() {
+		IncreasingSpeedLimits.main(Array("src/test/resources/gcj08/round1c/C-test.in"))
+		check("src/test/resources/gcj08/round1c/C-test.in")
+	}
 }

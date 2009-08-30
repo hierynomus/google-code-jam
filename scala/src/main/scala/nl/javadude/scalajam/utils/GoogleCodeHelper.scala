@@ -42,5 +42,4 @@ object GoogleCodeHelper {
 	implicit def iteratorToHelper(x:Iterator[String]) = {
 		new GoogleCodeHelper(x)
 	}
- 
 }
