@@ -3,6 +3,7 @@ import nl.javadude.scalajam.utils.GoogleCodeHelper._
 
 /**
  * VERIFIED against Google Code Jam
+ * @author Jeroen van Erp - jeroen at hierynomus.com
  */
 object Milkshakes extends CodeJam {
 	def solveProblem(reader : Iterator[String]) : String = {

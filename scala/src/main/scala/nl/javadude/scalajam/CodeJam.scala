@@ -3,9 +3,13 @@ package nl.javadude.scalajam
 import scala.io._
 import java.io._
 import utils.FileHelper._
-import _root_.scala.collection.mutable._
 import utils.GoogleCodeHelper._
 
+/**
+ * Trait for the Google Code Jam problems.
+ * Reads from input file and collects all output from all problems before writing that to a file.
+ * @author Jeroen van Erp - jeroen at hierynomus.com
+ */
 trait CodeJam {
 
 	def main(args: Array[String]) = {

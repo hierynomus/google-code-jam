@@ -3,6 +3,9 @@ import utils.GoogleCodeHelper._
 import scala.collection.mutable
 import scala.Math._
 
+/**
+ * @author Jeroen van Erp - jeroen at hierynomus.com
+ */
 object NumberSets extends CodeJam {
 	def solveProblem (reader : Iterator[String]) : String = {
 		val ar = reader.nextIntArray
