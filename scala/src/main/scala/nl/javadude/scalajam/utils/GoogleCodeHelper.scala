@@ -27,6 +27,10 @@ class GoogleCodeHelper(val iterator : Iterator[String]) {
 		nextLongArray map (BigDecimal(_))
 	}
 
+ 	def nextBigIntArray : Array[BigInt] = {
+		nextLongArray map (BigInt(_))
+	}
+
  	def nextStringArray : Array[String] = {
 		trimmedLine split " "  
 	}

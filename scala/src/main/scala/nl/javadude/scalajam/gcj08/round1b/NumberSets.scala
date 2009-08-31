@@ -8,44 +8,49 @@ import scala.Math._
 object NumberSets extends CodeJam {
 	def solveProblem (reader : Iterator[String]) : String = {
 		import utils.GoogleCodeHelper._
-		val ar = reader.nextIntArray
+		val ar = reader.nextLongArray
 		val (a, b, p) = (ar(0), ar(1), ar(2))
-		var primes = 2.to((b - a) + 1).toList
+		val prob = "(" + a + ", " + b + ", " + p + ")"
+		var primes = 2.to((b - a).toInt + 1).toList
+		val sieveStart = System.currentTimeMillis
 		while(!primes.isEmpty && primes.head < p) {
 			primes = sieve(primes)
 		}
-
-		var ds = new DisjointSet()
-		val list = for (x <- (a to b)) yield ds.make(x)
-  
-		while (!primes.isEmpty) {
-			val group = list.filter(x => x.value % primes.head == 0).toList
-			group.tail.foreach(n => ds.union(group.head, n))
-			println(ds.disjoint)
-//			val group = ints.filter(x => x % primes.head == 0).foldLeft(mutable.Set[Int]()) { (s, e) => s + e}
-//			ints = ints.filter(x => !group.contains(x))
-//			groups += group
-			primes = sieve(primes)
+		println (prob + " sieving took " + (System.currentTimeMillis - sieveStart))
+		val ds = new DisjointSet[Long]()
+		var c = a
+		val disjointBuildStart = System.currentTimeMillis
+		while (c <= b) {
+			ds.make(c)
+			c += 1
 		}
-//		list.filter(x => x.parent == x).size.toString
+		println (prob + " disjoint build took " + (System.currentTimeMillis - disjointBuildStart) + "disjoint contains " + ds.disjoint.keySet.size)
+
+		val disjointStart = System.currentTimeMillis
+		while (!primes.isEmpty) {
+			val group = ds.elements.filter(x => x % primes.head == 0).toList
+			group.tail.foreach(n => ds.union(group.head, n))
+			primes = sieve(primes)
+			println (prob + " disjoint took " + (System.currentTimeMillis - disjointStart) + " primessize: " + primes.size)
+			println (primes.take(15))
+		}
+		println (prob + " disjoint took " + (System.currentTimeMillis - disjointStart))
 		ds.count.toString
-//		(groups.size + ints.size).toString
 	}
  
 	def sieve (primes : List[Int]) = (primes filter (x => (x % primes.head) != 0))
 }
 
-class DisjointSet {
-	val disjoint : mutable.Map[Int, Node] = mutable.Map[Int, Node]()
+class DisjointSet[A] {
+	val disjoint : mutable.Map[A, Node[A]] = mutable.Map[A, Node[A]]()
 
-	def make(i : Int) : Node = {
-	  	val n = new Node(i)
+	def make(i : A) {
+	  	val n = new Node[A](i)
 	  	n.parent = n
 		disjoint += (i -> n)
-		n
 	}
 
-	def find(i : Int) : Node = {
+	def find(i : A) : Node[A] = {
 		val x = disjoint get i
 		x match {
 		  case Some(x) => findRoot(x)
@@ -53,29 +58,26 @@ class DisjointSet {
 		}
 	}
 
- 	def union(i : Int, j : Int) {
+ 	def union(i : A, j : A) {
 		val iRoot = find(i)
 		val jRoot = find(j)
-		union(iRoot, jRoot)
- 	}
-
-  	def union(x : Node, y : Node) {
-  		val iRoot = findRoot(x)
-  		val jRoot = findRoot(y)
-		if (iRoot.rank > jRoot.rank)
+		if (iRoot.rank > jRoot.rank) {
 			jRoot.parent = iRoot
-		else if (iRoot.rank < jRoot.rank)
+			disjoint += (jRoot.value -> jRoot)
+		} else if (iRoot.rank < jRoot.rank) {
 			iRoot.parent = jRoot
-		else if (iRoot != jRoot) {
+			disjoint += (iRoot.value -> iRoot)
+		} else if (iRoot != jRoot) {
 			jRoot.parent = iRoot
 			iRoot.rank += 1
+			disjoint += (jRoot.value -> jRoot)
 		}
-  	}
-  
-	def findRoot(x : Node) : Node = {
+ 	}
+
+	def findRoot(x : Node[A]) : Node[A] = {
 		x.parent.value match {
 			case x.value => x
-			case _ => x.parent = findRoot(x); x.parent
+			case _ => x.parent = findRoot(x.parent); x.parent
 		}
 	}
  
@@ -83,12 +85,20 @@ class DisjointSet {
 		val count = for ((k, v) <- disjoint if v.parent == v) yield v
 		count.toList.size
 	}
+ 
+	def elements = disjoint.keys
 }
 
-class Node(val value : Int) {
+class Node[A](val value : A) {
  
-	var parent : Node = null
+	var parent : Node[A] = null
 	var rank = 0
  
 	override def toString : String = { "Node[" + value + ", " + (if (parent == this) "self" else parent) + "]"}
+
+	override def equals(o : Any) = o match {
+	  case x : Node[A] => x.value == value
+	  case _ => false
+	}
+ 
 }
