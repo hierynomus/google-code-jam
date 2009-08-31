@@ -9,7 +9,7 @@ object NumberSets extends CodeJam {
 		var primes = 2.to(ar(1) / 2).toList
 		var ints = (ar(0).to(ar(1))).toList
 		val p = ar(2)
-		while(primes.head < p) {
+		while(!primes.isEmpty && primes.head < p) {
 			primes = sieve(primes)
 		}
   
