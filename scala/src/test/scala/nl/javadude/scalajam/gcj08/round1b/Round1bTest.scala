@@ -13,8 +13,14 @@ class Round1bTest extends CodeJamTest {
 	}
 
 	def testNumberSets() {
-//		NumberSets.main(Array("src/test/resources/gcj08/round1b/B-small-practice.in"))
-		NumberSets.main(Array("src/test/resources/gcj08/round1b/B-large-practice.in"))
-//		NumberSets.main(Array("src/test/resources/gcj08/round1b/B-test.in"))
+		println("NumberSetsAlt")
+		NumberSetsAlt.main(Array("src/test/resources/gcj08/round1b/B-small-practice.in"))
+		check("src/test/resources/gcj08/round1b/B-small-practice.in")
+		println("NumberSets")
+		NumberSets.main(Array("src/test/resources/gcj08/round1b/B-small-practice.in"))
+		check("src/test/resources/gcj08/round1b/B-small-practice.in")
+//		NumberSetsAlt.main(Array("src/test/resources/gcj08/round1b/B-large-practice.in"))
+		NumberSetsAlt.main(Array("src/test/resources/gcj08/round1b/B-test.in"))
+		check("src/test/resources/gcj08/round1b/B-test.in")
 	}
 }

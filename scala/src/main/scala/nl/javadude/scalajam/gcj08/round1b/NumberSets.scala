@@ -11,37 +11,42 @@ object NumberSets extends CodeJam {
 		val ar = reader.nextLongArray
 		val (a, b, p) = (ar(0), ar(1), ar(2))
 		val prob = "(" + a + ", " + b + ", " + p + ")"
-		var primes = 2.to((b - a).toInt + 1).toList
-		val sieveStart = System.currentTimeMillis
+		val start = System.currentTimeMillis
+		val width = (b-a).toInt
+		var primes = 2.to(width + 1).toList
+
 		while(!primes.isEmpty && primes.head < p) {
 			primes = sieve(primes)
 		}
-		println (prob + " sieving took " + (System.currentTimeMillis - sieveStart))
-		val ds = new DisjointSet[Long]()
-		var c = a
-		val disjointBuildStart = System.currentTimeMillis
-		while (c <= b) {
+		val ds = new DisjointSet[Long](a, width)
+		var c = 0
+		while (c <= ds.size) {
 			ds.make(c)
 			c += 1
 		}
-		println (prob + " disjoint build took " + (System.currentTimeMillis - disjointBuildStart) + "disjoint contains " + ds.disjoint.keySet.size)
 
-		val disjointStart = System.currentTimeMillis
-		while (!primes.isEmpty) {
-			val group = ds.elements.filter(x => x % primes.head == 0).toList
-			group.tail.foreach(n => ds.union(group.head, n))
-			primes = sieve(primes)
-			println (prob + " disjoint took " + (System.currentTimeMillis - disjointStart) + " primessize: " + primes.size)
-			println (primes.take(15))
-		}
-		println (prob + " disjoint took " + (System.currentTimeMillis - disjointStart))
-		ds.count.toString
+		val r = solve(ds, primes).count.toString
+		println(prob + " " + (System.currentTimeMillis - start) + " ms")
+		r
 	}
- 
+
+	def solve(ds : DisjointSet[Long], primes : List[Int]) : DisjointSet[Long] = {
+		primes.size match {
+		  case 0 => ds
+		  case _ => solve(merge(ds, primes.head), sieve(primes))
+		}
+	}
+
+	def merge(ds : DisjointSet[Long], prime : Int) : DisjointSet[Long] = {
+		val group = ds.elements.filter(x => (ds.base + x) % prime == 0).toList
+		group.tail.foreach(n => ds.union(group.head, n))
+		ds
+	}
+
 	def sieve (primes : List[Int]) = (primes filter (x => (x % primes.head) != 0))
 }
 
-class DisjointSet[A] {
+class DisjointSet[A](val base : Long, val size : Int) {
 	val disjoint : mutable.Map[A, Node[A]] = mutable.Map[A, Node[A]]()
 
 	def make(i : A) {

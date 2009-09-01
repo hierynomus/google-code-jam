@@ -28,9 +28,7 @@ object Milkshakes extends CodeJam {
 	def solve(flavours : Array[Boolean], customers : List[Map[Int, Boolean]], unsatisfied : List[Map[Int, Boolean]]) : Option[Array[Boolean]] = {
 		unsatisfied.size match {
 		  case 0 => Some(flavours)
-		  case _ => {
-			  satisfyCustomer(flavours, unsatisfied.head).flatMap { solve(_, customers, unSatisfiedCustomers(flavours, customers)) }
-		  }
+		  case _ => satisfyCustomer(flavours, unsatisfied.head).flatMap { solve(_, customers, unSatisfiedCustomers(flavours, customers)) }
 		}
 	}
 
