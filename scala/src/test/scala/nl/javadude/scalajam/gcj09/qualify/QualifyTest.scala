@@ -20,6 +20,8 @@ class QualifyTest extends CodeJamTest {
 	}
 
 	def testWelcomeToCodeJam() {
+		WelcomeToCodeJam.main(Array("src/test/resources/gcj09/qualify/C-test.in"))
+		check("src/test/resources/gcj09/qualify/C-test.in")
 		WelcomeToCodeJam.main(Array("src/test/resources/gcj09/qualify/C-small.in"))
 		check("src/test/resources/gcj09/qualify/C-small.in")
 //		WelcomeToCodeJam.main(Array("src/test/resources/gcj09/qualify/C-large.in"))
