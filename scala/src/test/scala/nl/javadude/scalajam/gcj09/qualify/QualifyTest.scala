@@ -1,7 +1,7 @@
 package nl.javadude.scalajam.gcj09.qualify
 
 class QualifyTest extends CodeJamTest {
-	def testAlienLanguage() {
+	def ntestAlienLanguage() {
 		AlienLanguage.main(Array("src/test/resources/gcj09/qualify/A-test.in"))
 		check("src/test/resources/gcj09/qualify/A-test.in")
 		AlienLanguage.main(Array("src/test/resources/gcj09/qualify/A-small.in"))
@@ -19,7 +19,7 @@ class QualifyTest extends CodeJamTest {
 		check("src/test/resources/gcj09/qualify/B-large.in")
 	}
 
-	def testWelcomeToCodeJam() {
+	def ntestWelcomeToCodeJam() {
 		WelcomeToCodeJam.main(Array("src/test/resources/gcj09/qualify/C-test.in"))
 		check("src/test/resources/gcj09/qualify/C-test.in")
 		WelcomeToCodeJam.main(Array("src/test/resources/gcj09/qualify/C-small.in"))

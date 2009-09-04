@@ -108,6 +108,4 @@ class Shed(val h : Int, val w : Int, val theMap : Array[Array[Int]]) {
 		val flowTo = flowMap(index)
 		if (flowTo != index && basins(flowTo) == -1) fillTheFlow(flowTo, basin)
 	}
-
-
 }
