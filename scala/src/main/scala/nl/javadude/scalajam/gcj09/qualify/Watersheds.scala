@@ -2,8 +2,9 @@ package nl.javadude.scalajam.gcj09.qualify
 
 import scala.io._
 import java.io._
-import utils.FileHelper._
-import utils.GoogleCodeHelper._
+import nl.javadude.scalajam.utils.FileHelper._
+import nl.javadude.scalajam.utils.GoogleCodeHelper._
+import nl.javadude.scalajam.CodeJam
 
 /**
  * Watersheds

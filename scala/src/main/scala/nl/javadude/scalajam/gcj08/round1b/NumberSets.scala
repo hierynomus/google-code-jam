@@ -1,13 +1,14 @@
 package nl.javadude.scalajam.gcj08.round1b
 import scala.collection.mutable
 import scala.Math._
+import nl.javadude.scalajam.CodeJam
 
 /**
  * @author Jeroen van Erp - jeroen at hierynomus.com
  */
 object NumberSets extends CodeJam {
 	def solveProblem (reader : Iterator[String]) : String = {
-		import utils.GoogleCodeHelper._
+		import nl.javadude.scalajam.utils.GoogleCodeHelper._
 		val ar = reader.nextLongArray
 		val (a, b, p) = (ar(0), ar(1), ar(2))
 		val prob = "(" + a + ", " + b + ", " + p + ")"

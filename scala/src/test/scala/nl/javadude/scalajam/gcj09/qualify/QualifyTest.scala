@@ -1,7 +1,11 @@
 package nl.javadude.scalajam.gcj09.qualify
 
+import nl.javadude.scalajam.CodeJamTest
+import org.junit.Test
+
 class QualifyTest extends CodeJamTest {
-	def ntestAlienLanguage() {
+  @Test
+	def alienLanguage() {
 		AlienLanguage.main(Array("src/test/resources/gcj09/qualify/A-test.in"))
 		check("src/test/resources/gcj09/qualify/A-test.in")
 		AlienLanguage.main(Array("src/test/resources/gcj09/qualify/A-small.in"))
@@ -9,8 +13,9 @@ class QualifyTest extends CodeJamTest {
 		AlienLanguage.main(Array("src/test/resources/gcj09/qualify/A-large.in"))
 		check("src/test/resources/gcj09/qualify/A-large.in")
 	}
- 
-	def testWatersheds() {
+
+  @Test
+	def watersheds() {
 		Watersheds.main(Array("src/test/resources/gcj09/qualify/B-test.in"))
 		check("src/test/resources/gcj09/qualify/B-test.in")
 		Watersheds.main(Array("src/test/resources/gcj09/qualify/B-small.in"))
@@ -19,7 +24,8 @@ class QualifyTest extends CodeJamTest {
 		check("src/test/resources/gcj09/qualify/B-large.in")
 	}
 
-	def ntestWelcomeToCodeJam() {
+  @Test
+	def welcomeToCodeJam() {
 		WelcomeToCodeJam.main(Array("src/test/resources/gcj09/qualify/C-test.in"))
 		check("src/test/resources/gcj09/qualify/C-test.in")
 		WelcomeToCodeJam.main(Array("src/test/resources/gcj09/qualify/C-small.in"))

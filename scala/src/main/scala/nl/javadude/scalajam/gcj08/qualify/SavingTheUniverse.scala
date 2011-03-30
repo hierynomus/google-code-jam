@@ -1,5 +1,6 @@
 package nl.javadude.scalajam.gcj08.qualify
 import nl.javadude.scalajam.utils.GoogleCodeHelper._
+import nl.javadude.scalajam.CodeJam
 
 /**
  * VERIFIED against Google Code Jam

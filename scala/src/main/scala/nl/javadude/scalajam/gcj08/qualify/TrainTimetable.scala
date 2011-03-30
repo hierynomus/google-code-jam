@@ -1,6 +1,7 @@
 package nl.javadude.scalajam.gcj08.qualify
 import nl.javadude.scalajam.utils.GoogleCodeHelper._
 import _root_.scala.collection.mutable._
+import nl.javadude.scalajam.CodeJam
 
 /**
  * @author Jeroen van Erp - jeroen at hierynomus.com

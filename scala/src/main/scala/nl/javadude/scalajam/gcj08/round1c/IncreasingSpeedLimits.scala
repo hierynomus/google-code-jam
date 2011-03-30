@@ -1,5 +1,6 @@
 package nl.javadude.scalajam.gcj08.round1c
-import utils.GoogleCodeHelper._
+import nl.javadude.scalajam.utils.GoogleCodeHelper._
+import nl.javadude.scalajam.CodeJam
 
 class IncreasingSpeedLimits extends CodeJam {
 	def solveProblem(reader : Iterator[String]) : String = {

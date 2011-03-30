@@ -1,5 +1,6 @@
 package nl.javadude.scalajam.gcj09.qualify;
-import utils.GoogleCodeHelper._
+import nl.javadude.scalajam.utils.GoogleCodeHelper._
+import nl.javadude.scalajam.CodeJam
 
 /**
  * Welcome to Code Jam

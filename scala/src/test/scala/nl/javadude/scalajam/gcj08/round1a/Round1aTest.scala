@@ -1,19 +1,20 @@
 package nl.javadude.scalajam.gcj08.round1a
 
-
-import org.scalatest._
-import org.scalatest.junit.JUnit3Suite
+import nl.javadude.scalajam.CodeJamTest
+import org.junit.Test
 
 class Round1aTest extends CodeJamTest {
 
-	def testMinimumScalarProduct() {
+  @Test
+	def minimumScalarProduct() {
 		MinimumScalarProduct.main(Array("src/test/resources/gcj08/round1a/A-small-practice.in"))
 		check("src/test/resources/gcj08/round1a/A-small-practice.in")
 		MinimumScalarProduct.main(Array("src/test/resources/gcj08/round1a/A-large-practice.in"))
 		check("src/test/resources/gcj08/round1a/A-large-practice.in")
 	}
 
-	def testMilkshakes() {
+  @Test
+	def milkshakes() {
 		Milkshakes.main(Array("src/test/resources/gcj08/round1a/B-small-practice.in"))
 		check("src/test/resources/gcj08/round1a/B-small-practice.in")
 		Milkshakes.main(Array("src/test/resources/gcj08/round1a/B-large-practice.in"))
