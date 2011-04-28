@@ -19,6 +19,9 @@ class GoogleCodeHelper(val iterator : Iterator[String]) {
 		nextStringArray map (_.toInt)  
 	}
 
+  def nextCharArray : Array[Char] = {
+    iterator next() toCharArray
+  }
 	def nextLongArray : Array[Long] = {
 		nextStringArray map (_.toLong)  
 	}
