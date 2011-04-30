@@ -3,3 +3,12 @@ target
 *.out
 .manager
 .DS_Store
+# SBT output
+target/
+lib_managed/
+src_managed/
+project/boot/
+
+# idea project files
+.idea/
+*.iml
