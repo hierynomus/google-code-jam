@@ -7,6 +7,16 @@ import org.junit.Test
 class QualifyTest extends CodeJamTest {
 
   @Test
+  def storeCredit() {
+    StoreCredit.main(Array("src/test/resources/acj10/qualify/A-test.in"))
+    check("src/test/resources/acj10/qualify/A-test.in")
+    StoreCredit.main(Array("src/test/resources/acj10/qualify/A-small-practice.in"))
+    check("src/test/resources/acj10/qualify/A-small-practice.in")
+    StoreCredit.main(Array("src/test/resources/acj10/qualify/A-large-practice.in"))
+    check("src/test/resources/acj10/qualify/A-large-practice.in")
+  }
+
+  @Test
   def reverseWords() {
     ReverseWords.main(Array("src/test/resources/acj10/qualify/B-test.in"))
     check("src/test/resources/acj10/qualify/B-test.in")

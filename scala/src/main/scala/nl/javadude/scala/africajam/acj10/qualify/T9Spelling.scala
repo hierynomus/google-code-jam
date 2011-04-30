@@ -36,6 +36,9 @@ object T9Spelling extends CodeJam {
   )
 
   def solveProblem(reader: Iterator[String]) = {
-    reader.nextCharArray.map(rainbowTable(_)).foldLeft("")((a: String, b: String) => if (a.endsWith(b.charAt(0).toString)) a + " " + b else a + b)
+    reader.nextCharArray.map(rainbowTable(_)).foldLeft("")((a: String, b: String) => a.endsWith(b.charAt(0).toString) match {
+      case true => a + " " + b
+      case false => a + b
+    })
   }
 }

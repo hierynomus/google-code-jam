@@ -6,6 +6,6 @@ import nl.javadude.scala.utils.GoogleCodeHelper._
 
 object ReverseWords extends CodeJam {
   def solveProblem(reader: Iterator[String]) = {
-    reader.nextStringArray.reverse.reduceLeft(_ + " " + _)
+    reader.nextStringArray.reduceLeft((a:String, b:String) => b + " " + a)
   }
 }
