@@ -23,7 +23,9 @@ trait CodeJam {
 		val nrProblems = reader nextInt
 		val results = new Array[String](nrProblems) 
 		for (val i <- 1 to nrProblems) {
+      println("Solving case " + i)
 			results(i - 1) = "Case #" + i + ": " + solveProblem(reader)
+      println(results(i - 1))
 		}
 		outputFile write results
 	}
