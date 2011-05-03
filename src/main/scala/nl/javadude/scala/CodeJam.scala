@@ -30,3 +30,5 @@ trait CodeJam {
  
 	def solveProblem(reader : Iterator[String]) : String
 }
+
+
