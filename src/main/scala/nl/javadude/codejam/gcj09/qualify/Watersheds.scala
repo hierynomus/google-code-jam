@@ -1,4 +1,4 @@
-package nl.javadude.scala.gcj09.qualify
+package nl.javadude.codejam.gcj09.qualify
 
 import scala.io._
 import java.io._

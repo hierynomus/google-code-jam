@@ -1,4 +1,4 @@
-package nl.javadude.scala.gcj09.qualify;
+package nl.javadude.codejam.gcj09.qualify;
 import nl.javadude.scala.utils.GoogleCodeHelper._
 import nl.javadude.scala.CodeJam
 
