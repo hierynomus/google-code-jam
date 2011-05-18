@@ -18,9 +18,9 @@ trait CodeJam {
 		}
   
 		val input = args(0)
-		val outputFile = new File((input substring(0, input lastIndexOf("."))) + ".out")
-		val reader = Source fromFile(input) getLines
-		val nrProblems = reader nextInt
+		val outputFile = new File((input.substring(0, input.lastIndexOf("."))) + ".out")
+		val reader = Source.fromFile(input).getLines()
+		val nrProblems = reader.nextInt
 		val results = new Array[String](nrProblems) 
 		for (val i <- 1 to nrProblems) {
       println("Solving case " + i)

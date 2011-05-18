@@ -7,10 +7,10 @@ package nl.javadude.scala.utils
 class GoogleCodeHelper(val iterator : Iterator[String]) {
   
 	def trimmedLine = {
-		iterator next() trim()
+		iterator.next().trim()
 	}
 	def nextInt : Int = {
-		trimmedLine toInt
+		trimmedLine.toInt
 	}
  
 	def nextIntArray : Array[Int] = {
@@ -18,7 +18,7 @@ class GoogleCodeHelper(val iterator : Iterator[String]) {
 	}
 
   def nextCharArray : Array[Char] = {
-    iterator next() toCharArray
+    iterator.next().toCharArray
   }
 	def nextLongArray : Array[Long] = {
 		nextStringArray map (_.toLong)  
@@ -42,7 +42,7 @@ class GoogleCodeHelper(val iterator : Iterator[String]) {
 
 	def skipLines(nr:Int) {
 		for (val i <- 1 to nr) {
-			iterator next
+			iterator.next()
 		}
 	}
 }

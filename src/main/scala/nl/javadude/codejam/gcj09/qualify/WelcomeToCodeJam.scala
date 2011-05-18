@@ -14,60 +14,23 @@ object WelcomeToCodeJam extends CodeJam {
 		val line = reader.trimmedLine
 
 		// first filter all characters not occurring in pattern
-		val filteredLine = makeHisto(line.toList.filter(x => expr.contains(x)))
+		val filteredLine = line.toList.filter(x => expr.contains(x))
 		val exprList = expr.toList
-		(solve(filteredLine, exprList) % 10000) formatted ("%04d")
-	}
 
-	def makeHisto(line : List[Char]) : List[(Char, Long)] = {
-		if (line.isEmpty) {
-			List[(Char, Long)]()
-		} else {
-			val h = histoLetter(line.tail, line.head)
-			val newLine = line.drop(h._2.toInt)
-			newLine.isEmpty match {
-			  case true => List(h)
-			  case false => List(h) ++ makeHisto(newLine)
-			}
-		}
-	}
+    val lookup = scala.collection.mutable.Map[(Int, Int), Int]()
 
-	def histoLetter(line : List[Char], c : Char) : (Char, Long) = {
-		(c, (line takeWhile (_ == c)).size + 1)
-	}
+    def solve(a: Int, b: Int) : Int = {
+      val pair = (a, b)
+      if (lookup.contains(pair)) lookup(pair) else {
+        if (b == expr.length) 1 else if (a == line.length) 0 else {
+          val c = ((if (line(a) == expr(b)) solve(a + 1, b + 1) else 0) + solve(a + 1, b)) % 10000
+          lookup.put(pair, c)
+          c
+        }
+      }
+    }
 
-	def solve(line : List[(Char, Long)], expr : List[Char]) : Long = {
-		var count : Long = 0L
-		if (!expr.isEmpty) {
-			var restLine = findNext(line, expr)
-			while (!restLine.isEmpty) {
-				count += (restLine.head._2 * solve(restLine.tail, expr.tail))
-				restLine = findNext(restLine.tail, expr) 
-			}
-		} else {
-		  count = 1
-		}
-		count
+		(solve(0, 0) % 10000) formatted ("%04d")
 	}
-
-	def findNext(line : List[(Char, Long)], expr : List[Char]) = {
-		line.dropWhile(_._1 != expr.head)
-	}
-
-// 	def solve(line : List[Char], expr : List[Char]) : Long = {
-//		line.isEmpty match {
-//		  case true => 0
-//		  case false => {
-//			  val t = line.head
-//			  expr.head match {
-//			    case `t` => expr.tail.isEmpty match {
-//			      case true => 1 + solve(line.tail.dropWhile(_ != expr.head), expr)
-//			      case false => solve(line.tail.dropWhile(_ != expr.tail.head), expr.tail) + solve(line.tail.dropWhile(_ != expr.head), expr)
-//			    }
-//			    case _ => solve(line.tail.dropWhile(_ != expr.head), expr)
-//			  }
-//		  }
-//		}
-//	}
 
 }

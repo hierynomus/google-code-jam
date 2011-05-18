@@ -9,10 +9,10 @@ import _root_.scala.collection.mutable._
  * @author Jeroen van Erp - jeroen at hierynomus.com
  */
 class FileHelper(file : File) {
- 	def write(text : Iterable[String]) : Unit = {
+ 	def write(text : Iterable[String]) {
 		val fw = new FileWriter(file)
 		try{ fw.write(text.toList.tail.foldLeft(text.toList.head) {_+"\n"+_}) }
-		finally{ fw.close }
+		finally{ fw.close() }
 	}
 
 }
