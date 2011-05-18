@@ -41,7 +41,7 @@ class GoogleCodeHelper(val iterator : Iterator[String]) {
 	}
 
 	def skipLines(nr:Int) {
-		for (val i <- 1 to nr) {
+		for (i <- 1 to nr) {
 			iterator.next()
 		}
 	}

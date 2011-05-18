@@ -1,4 +1,4 @@
-package nl.javadude.scala.gcj08.round1c
+package nl.javadude.codejam.gcj08.round1c
 import nl.javadude.scala.utils.GoogleCodeHelper._
 import nl.javadude.scala.CodeJam
 

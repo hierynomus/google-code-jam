@@ -1,4 +1,4 @@
-package nl.javadude.scala.gcj08.round1a
+package nl.javadude.codejam.gcj08.round1a
 import nl.javadude.scala.utils.GoogleCodeHelper._
 import nl.javadude.scala.CodeJam
 
@@ -8,10 +8,10 @@ import nl.javadude.scala.CodeJam
  */
 object MinimumScalarProduct extends CodeJam {
 	def solveProblem(reader : Iterator[String]) = {
-		reader next
-		val ar1 = reader.nextBigDecimalArray.toList.sort (_ < _)
-		val ar2 = reader.nextBigDecimalArray.toList.sort (_ > _)
+		reader.next()
+		val ar1 = reader.nextBigDecimalArray.toList.sortWith(_ < _)
+		val ar2 = reader.nextBigDecimalArray.toList.sortWith(_ > _)
 		val xx = (ar1 zip ar2) map (t => t._1 * t._2)
-		xx reduceLeft (_ + _) toString
+		xx.reduceLeft(_ + _).toString()
 	}
 }

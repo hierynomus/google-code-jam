@@ -5,7 +5,7 @@ import nl.javadude.scala.utils.GoogleCodeHelper._
 
 object AllYourBase extends CodeJam{
   def solveProblem(reader: Iterator[String]) = {
-    val array = reader nextCharArray
+    val array = reader.nextCharArray
 
     val base = determineBase(array)
 

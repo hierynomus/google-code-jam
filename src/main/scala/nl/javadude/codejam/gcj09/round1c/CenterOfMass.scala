@@ -9,7 +9,7 @@ import java.awt.Point
  */
 object CenterOfMass extends CodeJam {
   def solveProblem(reader: Iterator[String]) = {
-    val numberOfFlies = reader nextInt
+    val numberOfFlies = reader.nextInt
 
     val (dC, dV) = (for {
       i <- 0 until numberOfFlies

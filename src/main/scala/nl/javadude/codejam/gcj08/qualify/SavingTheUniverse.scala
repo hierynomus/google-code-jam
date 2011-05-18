@@ -1,4 +1,4 @@
-package nl.javadude.scala.gcj08.qualify
+package nl.javadude.codejam.gcj08.qualify
 import nl.javadude.scala.utils.GoogleCodeHelper._
 import nl.javadude.scala.CodeJam
 
@@ -13,8 +13,8 @@ object SavingTheUniverse extends CodeJam {
 	  reader skipLines nrEngines
 	  var enginesEncountered = Set[String]()
 	  var switches = 0
-	  for (val s <- 1 to reader.nextInt) {
-		  val read = reader.next
+	  for (s <- 1 to reader.nextInt) {
+		  val read = reader.next()
 		  enginesEncountered += read
 		  if (enginesEncountered.size == nrEngines) {
 			  enginesEncountered = Set(read)

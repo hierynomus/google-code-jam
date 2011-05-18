@@ -1,4 +1,4 @@
-package nl.javadude.scala.gcj08.round1b
+package nl.javadude.codejam.gcj08.round1b
 import scala.collection.mutable
 import scala.Math._
 import nl.javadude.scala.CodeJam
@@ -42,7 +42,7 @@ object NumberSetsAlt extends CodeJam {
 
 class AltDisjointSet(val size : Int, val base : Long) {
 	val parents = (0 to size).toArray
-	val rank = Array.make(size + 1, 0)
+	val rank = Array.fill(size + 1)(0)
 
 	def find(i : Int) : Int = {
 		val x = parents(i)

@@ -5,7 +5,7 @@ import nl.javadude.scala.utils.GoogleCodeHelper._
 
 object BribeThePrisoners extends CodeJam {
   def solveProblem(reader: Iterator[String]) = {
-    val Array(p, q) = reader nextIntArray
+    val Array(p, q) = reader.nextIntArray
     val toBeReleased = reader.nextIntArray.toList
 
     val lookup = scala.collection.mutable.Map[(Int, Int), Int]()

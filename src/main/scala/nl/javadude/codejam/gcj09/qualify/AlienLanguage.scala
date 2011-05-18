@@ -18,14 +18,14 @@ object AlienLanguage {
     }
 
     val input = args(0)
-    val outputFile = new File((input substring (0, input lastIndexOf ("."))) + ".out")
-    val reader = Source fromFile (input) getLines
-    val ar = reader nextIntArray
+    val outputFile = new File((input.substring(0, input.lastIndexOf("."))) + ".out")
+    val reader = Source.fromFile(input).getLines()
+    val ar = reader.nextIntArray
     val (tokens, nrWords, nrProblems) = (ar(0), ar(1), ar(2))
     val results = new Array[String](nrProblems)
 
     val words = (1 to nrWords).map(x => reader.trimmedLine).toList
-    for (val i <- 1 to nrProblems) {
+    for (i <- 1 to nrProblems) {
       results(i - 1) = "Case #" + i + ": " + solveProblem(reader, words)
     }
     outputFile write results

@@ -1,4 +1,4 @@
-package nl.javadude.scala.africajam.acj10.qualify
+package nl.javadude.africajam.acj10.qualify
 
 import nl.javadude.scala.CodeJam
 import nl.javadude.scala.utils.GoogleCodeHelper._

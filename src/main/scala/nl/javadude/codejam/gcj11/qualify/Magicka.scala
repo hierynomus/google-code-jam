@@ -41,6 +41,6 @@ object Magicka extends CodeJam {
           }
         }
       }
-    }).toCharArray.deepMkString("[", ", ", "]")
+    }).toCharArray.deep.mkString("[", ", ", "]")
   }
 }

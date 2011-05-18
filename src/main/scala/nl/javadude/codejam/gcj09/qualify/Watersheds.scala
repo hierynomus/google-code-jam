@@ -19,7 +19,7 @@ object Watersheds extends CodeJam {
 		val theMap = (1 to h).map(x => reader.nextIntArray).toArray
   
 		val shed = new Shed(h, w, theMap)
-		val basins : Array[String] = shed.solve
+		val basins : Array[String] = shed.solve()
 		printRecursive(basins, w)
 	}
 
@@ -33,7 +33,7 @@ object Watersheds extends CodeJam {
 
 class Shed(val h : Int, val w : Int, val theMap : Array[Array[Int]]) {
 	val flowMap = (for (hPos <- 0 until h; wPos <- 0 until w) yield determineFlowTo(hPos, wPos)).toArray
-	val basins : Array[Int] = Array.make(h * w, -1)
+	val basins : Array[Int] = Array.fill(h * w)(-1)
 
 	def determineFlowTo(hPos : Int, wPos : Int) : Int = {
 		val north = determineAltitude(hPos - 1, wPos)
@@ -41,7 +41,7 @@ class Shed(val h : Int, val w : Int, val theMap : Array[Array[Int]]) {
 		val east = determineAltitude(hPos, wPos + 1)
 		val south = determineAltitude(hPos + 1, wPos)
 		val me = determineAltitude(hPos, wPos)
-		val minAltitude = List(me, north, west, east, south).sort(_<_).head
+		val minAltitude = List(me, north, west, east, south).sortWith(_<_).head
   
 		if (me > north && north == minAltitude) {
 			convertToIndex(hPos - 1, wPos)

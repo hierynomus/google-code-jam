@@ -1,4 +1,4 @@
-package nl.javadude.scala.gcj08.round1b
+package nl.javadude.codejam.gcj08.round1b
 import nl.javadude.scala.utils.GoogleCodeHelper._
 import nl.javadude.scala.CodeJam
 
@@ -21,8 +21,8 @@ object CropTriangles extends CodeJam {
 		}
 		val treesInSameClass = 0 until 9 map (x => trees(x) * (trees(x)-1) * (trees(x)-2) / 6) // N! / 3!
 
-		val triples = for (val t1 <- 0 until 9; val t2 <- (t1 + 1) until 9; val t3 <- (t2 + 1) until 9) yield (t1, t2, t3)
-		val filtered = triples.filter (t => (t._1/3 + t._2/3 + t._3/3) % 3 == 0 && (t._1%3 + t._2%3 + t._3%3) % 3 == 0)
+		val triples = for (t1 <- 0 until 9; val t2 <- (t1 + 1) until 9; val t3 <- (t2 + 1) until 9) yield (t1, t2, t3)
+		val filtered = triples.filter(t => (t._1/3 + t._2/3 + t._3/3) % 3 == 0 && (t._1%3 + t._2%3 + t._3%3) % 3 == 0)
 		val nrTrees = filtered.map(t => trees(t._1) * trees(t._2) * trees(t._3))
 
 		nrTrees.++(treesInSameClass).reduceLeft(_+_).toString

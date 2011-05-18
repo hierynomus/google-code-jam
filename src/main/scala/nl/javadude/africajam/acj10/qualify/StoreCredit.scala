@@ -1,4 +1,4 @@
-package nl.javadude.scala.africajam.acj10.qualify
+package nl.javadude.africajam.acj10.qualify
 
 import nl.javadude.scala.CodeJam
 import nl.javadude.scala.utils.GoogleCodeHelper._
@@ -6,8 +6,8 @@ import nl.javadude.scala.utils.GoogleCodeHelper._
 object StoreCredit extends CodeJam {
   def solveProblem(reader: Iterator[String]) = {
     val credit = reader.trimmedLine.toInt
-    reader.next
-    val products = reader nextIntArray
+    reader.skipLines(1)
+    val products = reader.nextIntArray
 
     val sortedProducts = products sorted(Ordering.Int)
 
