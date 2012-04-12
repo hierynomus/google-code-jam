@@ -4,13 +4,32 @@ package gcj11.qualify
 import collection.Iterator
 import io.Source
 import java.io.{FileWriter, File}
+import collection.immutable.{List, IndexedSeq}
 
-class Magicka {
+object Magicka {
   import GoogleCodeHelper.iteratorToHelper
 
   def solveProblem(reader: Iterator[String]) = {
-    "NOT IMPLEMENTED"
+    val line = reader.nextStringArray
+    val c = line(0).toInt
+    val combinations = (for (i <- 1 to c) yield line(i)).map(s => List((s.substring(0, 2), s(2)), (s.substring(0, 2).reverse, s(2)))).flatten.toMap
+    val d = line(c + 1).toInt
+    val oppositions = (for (i <- 1 to d) yield line(c + 1 + i)).map(s => (s(0), s(1)))
+
+    val invocation = line(c + d + 3)
+
+    invocation.foldLeft(List[Char]())((i: List[Char], x: Char) =>
+      if (i.length == 0) x :: i
+      else {
+        val p = i.head.toString + x
+        if (combinations.contains(p)) combinations(p) :: i.tail
+        else if (oppositions.exists(p => (x :: i).contains(p._1) && (x :: i).contains(p._2))) Nil
+        else x :: i
+      }).reverse.mkString("[", ", ", "]")
+
   }
+
+  def name = "gcj11.qualify.Magicka"
 
   def main(args: Array[String]) {
     if (args.length == 0) {
