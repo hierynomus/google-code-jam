@@ -6,7 +6,7 @@ import gcj09.qualify.{Watersheds, AlienLanguage}
 import gcj10.qualify.{FairWarning, Snapper}
 import gcj10.round1b.FileFixit
 import gcj10.round1c.RopeIntranet
-import gcj11.qualify.Magicka
+import gcj11.qualify.{GoroSort, CandySplitting, Magicka}
 import io.Source
 import org.specs2.mutable.Specification
 
@@ -39,6 +39,8 @@ class GoogleCodeJamTest extends Specification {
 
   "GCJ11" should {
     createTestCase(Magicka)
+    createTestCase(CandySplitting)
+    createTestCase(GoroSort)
   }
   
   private def createTestCase(program: { def main(args: Array[String]); def name: String}) = {
