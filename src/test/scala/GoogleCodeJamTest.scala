@@ -1,3 +1,4 @@
+import acj10.qualify.{T9Spelling, ReverseWords, StoreCredit}
 import collection.immutable.List
 import gcj08.qualify.{TrainTimetable, SavingTheUniverse}
 import gcj08.round1a.{Milkshakes, MinimumScalarProduct}
@@ -20,6 +21,12 @@ class GoogleCodeJamTest extends Specification {
   "GCJ09" should {
     createTestCase(AlienLanguage)
     createTestCase(Watersheds)
+  }
+
+  "Africa Code Jam 2010" should {
+    createTestCase(StoreCredit)
+    createTestCase(ReverseWords)
+    createTestCase(T9Spelling)
   }
 
   "GCJ10" should {
