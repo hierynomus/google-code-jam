@@ -7,46 +7,59 @@ import gcj10.qualify.{FairWarning, Snapper}
 import gcj10.round1b.FileFixit
 import gcj10.round1c.RopeIntranet
 import gcj11.qualify.{GoroSort, CandySplitting, Magicka}
+import gcj12.qualify.{RecycledNumbers, DancingWithTheGooglers, SpeakingInTongues}
 import io.Source
 import org.specs2.mutable.Specification
 
 class GoogleCodeJamTest extends Specification {
 
   "GCJ08" should {
-    createTestCase(SavingTheUniverse)
-    createTestCase(TrainTimetable)
-    createTestCase(MinimumScalarProduct)
-    createTestCase(Milkshakes)
+    createTestCases(SavingTheUniverse)
+    createTestCases(TrainTimetable)
+    createTestCases(MinimumScalarProduct)
+    createTestCases(Milkshakes)
   }
 
   "GCJ09" should {
-    createTestCase(AlienLanguage)
-    createTestCase(Watersheds)
+    createTestCases(AlienLanguage)
+    createTestCases(Watersheds)
   }
 
   "Africa Code Jam 2010" should {
-    createTestCase(StoreCredit)
-    createTestCase(ReverseWords)
-    createTestCase(T9Spelling)
+    createTestCases(StoreCredit)
+    createTestCases(ReverseWords)
+    createTestCases(T9Spelling)
   }
 
   "GCJ10" should {
-    createTestCase(Snapper)
-    createTestCase(FairWarning)
-    createTestCase(FileFixit)
-    createTestCase(RopeIntranet)
+    createTestCases(Snapper)
+    createTestCases(FairWarning)
+    createTestCases(FileFixit)
+    createTestCases(RopeIntranet)
   }
 
   "GCJ11" should {
-    createTestCase(Magicka)
-    createTestCase(CandySplitting)
-    createTestCase(GoroSort)
+    createTestCases(Magicka)
+    createTestCases(CandySplitting)
+    createTestCases(GoroSort)
   }
-  
-  private def createTestCase(program: { def main(args: Array[String]); def name: String}) = {
+
+  "GCJ12" should {
+    createTestCase(SpeakingInTongues, "small")
+    createTestCases(DancingWithTheGooglers)
+    // Works but takes long and needs heap, more optimal solution was not necessary for qualify
+//    createTestCases(RecycledNumbers)
+  }
+
+  def createTestCase(program: {def main(args: Array[String]); def name: String}, x: String) = {
     val exampleName = program.name.replace('.', ' ')
-    new InExample(exampleName + " - small").>>(testInput(program, "small"))
-    new InExample(exampleName + " - large").>>(testInput(program, "large"))
+    new InExample(exampleName + " - " + x).>>(testInput(program, x))
+  }
+
+  private def createTestCases(program: { def main(args: Array[String]); def name: String}) = {
+    List("small", "large").map { x =>
+      createTestCase(program, x)
+    }.head
   }
 
   private def testInput(program: { def main(args: Array[String]); def name: String}, which: String) = {
