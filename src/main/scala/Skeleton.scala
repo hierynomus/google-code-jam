@@ -40,6 +40,7 @@ object Skeleton {
     def nextIntArray: Array[Int] = nextStringArray map (_.toInt)
     def nextCharArray: Array[Char] = iterator.next().toCharArray
     def nextLongArray: Array[Long] = nextStringArray map (_.toLong)
+    def nextDoubleArray: Array[Double] = nextStringArray map (_.toDouble)
     def nextBigDecimalArray: Array[BigDecimal] = nextLongArray map (BigDecimal(_))
     def nextBigIntArray: Array[BigInt] = nextStringArray map (BigInt(_))
     def nextStringArray: Array[String] = trimmedLine split " "
