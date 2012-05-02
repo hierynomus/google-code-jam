@@ -8,6 +8,7 @@ import gcj10.round1b.FileFixit
 import gcj10.round1c.RopeIntranet
 import gcj11.qualify.{GoroSort, CandySplitting, Magicka}
 import gcj12.qualify.{RecycledNumbers, DancingWithTheGooglers, SpeakingInTongues}
+import gcj12.round1a.PasswordProblem
 import io.Source
 import org.specs2.mutable.Specification
 
@@ -49,6 +50,7 @@ class GoogleCodeJamTest extends Specification {
     createTestCases(DancingWithTheGooglers)
     // Works but takes long and needs heap, more optimal solution was not necessary for qualify
 //    createTestCases(RecycledNumbers)
+    createTestCases(PasswordProblem)
   }
 
   def createTestCase(program: {def main(args: Array[String]); def name: String}, x: String) = {
