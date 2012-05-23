@@ -42,7 +42,7 @@ object PasswordProblem {
     val head = seq.sorted.head
 
     val charsNeededWhenEnter = BigDecimal(totalChars + 2)
-    if (head < charsNeededWhenEnter) "%.6f".format(head) else "%.6f".format(charsNeededWhenEnter)
+    (if (head < charsNeededWhenEnter) "%.6f".format(head) else "%.6f".format(charsNeededWhenEnter)).replace(',','.')
   }
 
   def name = "gcj12.round1a.PasswordProblem"

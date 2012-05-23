@@ -42,9 +42,7 @@ object RecycledNumbers {
     val nrProblems = reader.nextInt
     val results = new Array[String](nrProblems)
     for (i <- 1 to nrProblems) {
-      println("Solving case " + i)
       results(i - 1) = "Case #" + i + ": " + solveProblem(reader)
-      println(results(i - 1))
     }
     val fw = new FileWriter(outputFile)
     try {

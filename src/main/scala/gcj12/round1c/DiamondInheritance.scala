@@ -1,23 +1,51 @@
-package gcj12.qualify
+package gcj12.round1c
 
+import collection.immutable.IndexedSeq
 import collection.Iterator
 import io.Source
 import java.io.{FileWriter, File}
+import scala.collection.mutable.{Map => MMap}
 
-object DancingWithTheGooglers {
+object DiamondInheritance {
 
   import GoogleCodeHelper.iteratorToHelper
 
+
   def solveProblem(reader: Iterator[String]) = {
-    val line = reader.nextIntArray
-    val Array(nrGooglers, surprises, bestScore) = Array(line(0), line(1), line(2))
-    val contestants = for (i <- 1 to nrGooglers) yield line(2 + i)
-    val filter = contestants.filter(x => (x >= (bestScore * 3) - 4) && x >= bestScore) // filter out below (bestScore, bestScore - 2, bestScore - 2) --> worst surprise
-    val partition = filter.partition(_ < (bestScore * 3) - 2)
-    (partition._2.size + (if (partition._1.size < surprises) partition._1.size else surprises)).toString
+    val nrClasses = reader.nextInt
+    val seq: IndexedSeq[Array[Int]] = for (i <- 1 to nrClasses) yield reader.nextIntArray
+
+    val map: MMap[Int, List[Int]] = MMap()
+
+    var roots: List[Int] = Nil
+    for (i <- 1 to nrClasses) {
+      val seq1: Array[Int] = seq(i - 1)
+      val tail = seq1.tail
+      if (tail.isEmpty) roots = i :: roots
+      else {
+        for (j <- tail) {
+          if (map.contains(j)) map(j) = i :: map(j) else map(j) = i :: Nil
+        }
+      }
+    }
+
+    var cycle = false
+    for (r <- roots; if !cycle) {
+      val seen: Array[Boolean] = Array.fill(nrClasses)(false)
+      def trace(r: Int): Boolean = {
+        val map1: List[Int] = if (map.contains(r)) map(r) else Nil
+        map1.foreach(x => if (seen(x - 1)) cycle = true else seen(x - 1) = true)
+        if (cycle) true
+        else map1.map(trace(_)).exists(x => x)
+      }
+
+      trace(r)
+    }
+
+    if (cycle) "Yes" else "No"
   }
 
-  def name = "gcj12.qualify.DancingWithTheGooglers"
+  def name = "gcj12.round1c.DiamondInheritance"
 
   def main(args: Array[String]) {
     if (args.length == 0) {
@@ -51,6 +79,8 @@ object DancingWithTheGooglers {
     def nextCharArray: Array[Char] = iterator.next().toCharArray
 
     def nextLongArray: Array[Long] = nextStringArray map (_.toLong)
+
+    def nextDoubleArray: Array[Double] = nextStringArray map (_.toDouble)
 
     def nextBigDecimalArray: Array[BigDecimal] = nextLongArray map (BigDecimal(_))
 

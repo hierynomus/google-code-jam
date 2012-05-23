@@ -35,7 +35,6 @@ object KingdomRush {
           val newStars = currentStars + 1
           rec(completionsNeeded + 1, newStars, levelsOn1.filter(_ != level1Completed), levelsOn2)
         } else {
-          println("missed condition")
           "Too Bad"
         }
       }
