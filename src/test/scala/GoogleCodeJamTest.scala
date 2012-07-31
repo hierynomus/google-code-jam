@@ -6,7 +6,7 @@ import gcj09.qualify.{Watersheds, AlienLanguage}
 import gcj10.qualify.{FairWarning, Snapper}
 import gcj10.round1b.FileFixit
 import gcj10.round1c.RopeIntranet
-import gcj11.qualify.{GoroSort, CandySplitting, Magicka}
+import gcj11.qualify.{BotTrust, GoroSort, CandySplitting, Magicka}
 import gcj12.qualify.{RecycledNumbers, DancingWithTheGooglers, SpeakingInTongues}
 import gcj12.round1a.{KingdomRush, PasswordProblem}
 import gcj12.round1c.{BoxFactory, DiamondInheritance}
@@ -41,6 +41,7 @@ class GoogleCodeJamTest extends Specification {
   }
 
   "GCJ11" should {
+    createTestCases(BotTrust)
     createTestCases(Magicka)
     createTestCases(CandySplitting)
     createTestCases(GoroSort)
