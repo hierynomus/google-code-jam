@@ -1,3 +1,4 @@
+import java.io.File
 import scala.math._
 import scalax.io._
 
@@ -12,7 +13,9 @@ object Problem extends App {
   implicit val codec = Codec.UTF8
   val input: String = args(0)
   val iterator: Iterator[String] = Resource.fromFile(input).lines().toIterator
-  val output: Output = Resource.fromFile(input.substring(0, input.lastIndexOf(".")) + ".out")
+  val file = new File(input.substring(0, input.lastIndexOf(".")) + ".out")
+  file.delete()
+  val output: Output = Resource.fromFile(file)
 
   val nrProblems = iterator.nextInt
 
