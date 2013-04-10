@@ -1,0 +1,44 @@
+apply plugin: "scala"
+
+def scalaVersion = "2.10"
+
+repositories {
+  mavenCentral(artifactUrls: ["http://download.java.net/maven/2/"])
+  maven {
+    url "http://download.java.net/maven/2/"
+  }
+}
+
+dependencies {
+  compile "org.scala-lang:scala-library:${scalaVersion}.1"
+  compile "com.github.scala-incubator.io:scala-io-core_${scalaVersion}:0.4.1"
+  compile "com.github.scala-incubator.io:scala-io-file_${scalaVersion}:0.4.1"
+  testCompile "org.specs2:specs2_${scalaVersion}:1.14"
+  testCompile "junit:junit:4.7"
+}
+
+tasks.withType(ScalaCompile) {
+  scalaCompileOptions.useAnt = false
+  scalaCompileOptions.setAdditionalParameters(["-feature", "-language:implicitConversions", "-language:reflectiveCalls"])
+}
+
+fileTree("src/main/scala").include { "**/*.scala" }.each { f ->
+  def name = f.name.tokenize(".").get(0)
+  name = name[0].toLowerCase() + name[1..-1]
+
+  task "${name}Zip"(type: Zip) {
+    baseName "${name}"
+    destinationDir projectDir
+
+    into(f.parent - projectDir) {
+      from f.parent
+      include f.name
+    }
+
+    into("") {
+      from "."
+      include "build.gradle"
+    }
+  }
+  build.dependsOn("${name}Zip")
+}
