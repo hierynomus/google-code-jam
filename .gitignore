@@ -12,3 +12,10 @@ project/boot/
 # idea project files
 .idea/
 *.iml
+*.ipr
+*.iws
+
+# gradle out
+out/
+build/
+.gradle/

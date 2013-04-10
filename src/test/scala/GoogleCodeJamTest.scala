@@ -11,8 +11,11 @@ import gcj12.qualify.{RecycledNumbers, DancingWithTheGooglers, SpeakingInTongues
 import gcj12.round1a.{KingdomRush, PasswordProblem}
 import gcj12.round1c.{BoxFactory, DiamondInheritance}
 import io.Source
+import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
+import org.specs2.runner.JUnitRunner
 
+@RunWith(classOf[JUnitRunner])
 class GoogleCodeJamTest extends Specification {
 
   "GCJ08" should {

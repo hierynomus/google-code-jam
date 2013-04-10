@@ -1,6 +1,4 @@
 package nl.javadude.codejam.gcj08.round1b
-import scala.collection.mutable
-import scala.Math._
 import nl.javadude.scala.CodeJam
 
 /**
