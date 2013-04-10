@@ -13,7 +13,7 @@ object CenterOfMass extends CodeJam {
 
     val (dC, dV) = (for {
       i <- 0 until numberOfFlies
-      val ar = reader.nextIntArray
+      ar = reader.nextIntArray
     } yield ((ar(0), ar(1), ar(2)), (ar(3), ar(4), ar(5))))
       .reduceLeft((sum: ((Int, Int, Int), (Int, Int, Int)), adder: ((Int, Int, Int), (Int, Int, Int)))
         => ((sum._1._1 + adder._1._1, sum._1._2 + adder._1._2, sum._1._3 + adder._1._3),
@@ -49,7 +49,7 @@ object CenterOfMass extends CodeJam {
 
     println("d = " + d)
 
-    format("%.8f", d) + " " + t.toString
+    "%.8f %s".format(d, t)
   }
 
   def sqr(d: Double) : Double = d*d
