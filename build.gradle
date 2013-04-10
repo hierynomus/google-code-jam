@@ -4,11 +4,56 @@ apply plugin: "idea"
 def scalaVersion = "2.10"
 
 repositories {
-mavenCentral(artifactUrls: ["http://download.java.net/maven/2/"])
+  mavenCentral(artifactUrls: ["http://download.java.net/maven/2/"])
   maven {
     url "http://download.java.net/maven/2/"
   }
 }
+
+def sources = files(file("src").listFiles()).filter {!["main", "test"].contains(it.name)}
+
+sources.each { f ->
+  sourceSets {
+    "${f.name}" {
+      scala {
+        srcDir "src/${f.name}/scala"
+      }
+    }
+    "${f.name}Test" {
+      scala {
+        srcDir "src/${f.name}/test"
+      }
+      resources {
+        srcDir "src/${f.name}/test-resources"
+      }
+    }
+  }
+
+  configurations."${f.name}TestCompile".extendsFrom(configurations.testCompile)
+  configurations."${f.name}Compile".extendsFrom(configurations.compile)
+
+  dependencies {
+    "${f.name}TestCompile" files(sourceSets."${f.name}".output.classesDir)
+  }
+
+  task "${f.name}Test"(type: Test) {
+    testClassesDir = sourceSets."${f.name}Test".output.classesDir
+    classpath = sourceSets."${f.name}Test".runtimeClasspath + sourceSets."${f.name}".runtimeClasspath
+  }
+
+  idea {
+    module {
+      sourceDirs += file("src/${f.name}/scala")
+      testSourceDirs += file("src/${f.name}/test")
+      scopes.COMPILE.plus += configurations."${f.name}Compile"
+      scopes.TEST.plus += configurations."${f.name}TestCompile"
+      scopes.TEST.minus += configurations."${f.name}Compile"
+    }
+  }
+
+  build.dependsOn("${f.name}Test")
+}
+
 
 dependencies {
   compile "org.scala-lang:scala-library:${scalaVersion}.1"
