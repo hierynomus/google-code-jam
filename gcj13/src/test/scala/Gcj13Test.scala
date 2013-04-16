@@ -3,16 +3,14 @@ import io.Source
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
-import qualify._
+import qualification.TicTacTomek
 
 @RunWith(classOf[JUnitRunner])
-class Gcj09Test extends Specification {
-
+class Gcj13Test extends Specification {
   val resourceDir = "src/test/resources/"
 
-  "GCJ09" should {
-    createTestCases(AlienLanguage)
-    createTestCases(Watersheds)
+  "GCJ13" should {
+    createTestCases(TicTacTomek)
   }
 
   def createTestCase(program: {def main(args: Array[String]); def name: String}, x: String) = {

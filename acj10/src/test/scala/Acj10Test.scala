@@ -42,7 +42,7 @@ class Acj10Test extends Specification {
     val filtered = lines.filterNot(t => t._1 == t._2)
     if (!filtered.isEmpty)
       failure(filtered.foldLeft("Failed: \n") {
-        (s, t) => "%s\texpected [%s]; got [%s]\n".format(s, t._1, t._2)
+        (s, t) => "%s\texpected [%s]; got [%s]\n".format(s, t._2, t._1)
       })
     outputLines must equalTo(expectedLines)
   }
