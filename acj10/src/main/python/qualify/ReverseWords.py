@@ -10,7 +10,7 @@ getcontext().prec = 10
 
 
 def solve_one(f):
-    return ""
+    return " ".join(reversed(f.readwords()))
 
 
 def main():
@@ -29,15 +29,6 @@ def main():
             of.write_case(t)
             of.write_string(res)
             of.write_case_end()
-
-
-def fold(f, l, a):
-    """
-    f: the function to apply
-    l: the list to fold
-    a: the accumulator, who is also the 'zero' on the first call
-    """
-    return a if(len(l) == 0) else fold(f, l[1:], f(a, l[0]))
 
 
 def point_distance(p1, p2):
