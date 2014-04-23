@@ -1,5 +1,5 @@
-import java.io.File
-import scalax.io.{Output, Resource, Codec}
+import scala.io.Source
+import java.io.{File, FileWriter}
 import scala.math._
 
 object NewSkeleton {
@@ -12,16 +12,17 @@ object NewSkeleton {
   def name = ""
 
   def main(args: Array[String]) {
-    implicit val codec = Codec.UTF8
     val input: String = args(0)
-    val iterator: Iterator[String] = Resource.fromFile(input).lines().toIterator
+    val iterator: Iterator[String] = Source.fromFile(input).getLines()
     val file = new File(input.substring(0, input.lastIndexOf(".")) + ".out")
-    file.delete()
-    val output: Output = Resource.fromFile(file)
-
     val nrProblems = iterator.nextInt
-
-    output.writeStrings((1 to nrProblems).map(p => "Case #" + p + ": " + solveProblem(iterator)), "\n")
+    val results = (1 to nrProblems).map(p => "Case #" + p + ": " + solveProblem(iterator))
+    val fw = new FileWriter(file)
+    try {
+      fw.write(results.mkString("\n"))
+    } finally {
+      fw.close()
+    }
   }
 
   object googlecodejam {
