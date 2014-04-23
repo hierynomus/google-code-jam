@@ -1,15 +1,37 @@
+package qualification
+
 import java.io.File
 import scalax.io.{Output, Resource, Codec}
 import scala.math._
 
-object NewSkeleton {
+object Lawnmower {
   import googlecodejam._
 
+
   def solveProblem(reader: Iterator[String]) = {
-    "SOLVE"
+    val Array(height, width) = reader.nextIntArray
+
+    def findColMax(lawn: Array[Array[Int]], col: Int) = {
+      (for (h <- 0 until height) yield lawn(h)(col)).max
+    }
+
+    val myLawn: Array[Array[Int]] = Array.fill(height, width)(100)
+    val wantedLawn: Array[Array[Int]] = (for (i <- 0 until height) yield reader.nextIntArray).toArray
+
+    0.until(height).foreach { row =>
+      val rowMax = wantedLawn(row).max
+      0.until(width).foreach(c => myLawn(row)(c) = rowMax)
+    }
+
+    0.until(width).foreach { c =>
+      val colMax = findColMax(wantedLawn, c)
+      0.until(height).foreach(row => if (myLawn(row)(c) > colMax) myLawn(row)(c) = colMax)
+    }
+
+    if (wrapIntArray(wantedLawn.flatten).zip(wrapIntArray(myLawn.flatten)) forall (t => t._1 == t._2)) "YES" else "NO"
   }
 
-  def name = ""
+  def name = "qualification.Lawnmower"
 
   def main(args: Array[String]) {
     implicit val codec = Codec.UTF8

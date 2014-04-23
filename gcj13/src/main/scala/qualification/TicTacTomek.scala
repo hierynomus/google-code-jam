@@ -9,7 +9,7 @@ object TicTacTomek {
   import googlecodejam._
 
   def solveProblem(reader: Iterator[String]): String = {
-    val board: Array[Array[Char]] = (for (i <- 1.to(4)) yield reader.nextCharArray).toArray
+    val board: Array[Array[Char]] = reader.nextCharGrid(4)
     if (reader.hasNext) reader.next()
 
     def checkBoard(y: Int, x: Int, piece: Char): Boolean = board(y)(x) == piece || board(y)(x) == 'T'
@@ -56,6 +56,10 @@ object TicTacTomek {
   }
 
   object googlecodejam {
+    case class Grid[A](grid: Array[Array[A]]) {
+      def row(y: Int) = grid(y)
+      def col(x: Int) = (0 until grid.size).map(grid(_)(x))
+    }
     case class Point(x: Int, y: Int) {
       def dist(p: Point) = sqrt(pow(x - p.x, 2) + pow(y - p.y, 2))
     }
