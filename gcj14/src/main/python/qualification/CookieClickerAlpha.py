@@ -42,7 +42,7 @@ f = open(sys.argv[1], 'r')
 of = open(sys.argv[2], 'w')
 
 T = int(f.readline())
-print "Running [%s] Cases" % T
+print("Running [%s] Cases" % T)
 
 for t in range(T):
     res = solveOne(f)
