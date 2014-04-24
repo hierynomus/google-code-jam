@@ -9,12 +9,49 @@ import operator
 # Set precision high enough
 getcontext().prec = 10
 
-# Set recursion limit somewhat less restrictive
 sys.setrecursionlimit(1500)
+
+t9 = {
+    ' ': '0',
+    'a': '2',
+    'b': '22',
+    'c': '222',
+    'd': '3',
+    'e': '33',
+    'f': '333',
+    'g': '4',
+    'h': '44',
+    'i': '444',
+    'j': '5',
+    'k': '55',
+    'l': '555',
+    'm': '6',
+    'n': '66',
+    'o': '666',
+    'p': '7',
+    'q': '77',
+    'r': '777',
+    's': '7777',
+    't': '8',
+    'u': '88',
+    'v': '888',
+    'w': '9',
+    'x': '99',
+    'y': '999',
+    'z': '9999'
+}
 
 
 def solve_one(f):
-    return ""
+    line = f.readchars(False)[:-1]
+
+    def f(a, n):
+        keys = t9[n]
+        if a.endswith(keys[0]):
+            a += " "
+        return a + keys
+
+    return fold(f, line, "")
 
 
 def main():
@@ -93,7 +130,7 @@ class InFileWrapper(FileWrapper):
         return [Decimal(d) for d in self.readline().split()]
 
     def readline(self, strip=True):
-        if strip:
+        if (strip):
             return self.file.readline().strip()
         else:
             return self.file.readline()
