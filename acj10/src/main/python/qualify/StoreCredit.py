@@ -11,7 +11,25 @@ getcontext().prec = 10
 
 
 def solve_one(f):
-    return ""
+    C = f.readint()
+    f.skiplines(1)
+    P = dict(zip(count(1), f.readints()))
+    Ps = sort_dict_on_value(P)
+
+    p1, p2 = (0, len(Ps) - 1)
+
+    amount = Ps[p1][1] + Ps[p2][1]
+    while (amount != C):
+        if (amount < C):
+            p1 += 1
+        else:
+            p2 -= 1
+        amount = Ps[p1][1] + Ps[p2][1]
+
+    if Ps[p1][0] < Ps[p2][0]:
+        return "{} {}".format(Ps[p1][0], Ps[p2][0])
+    else:
+        return "{} {}".format(Ps[p2][0], Ps[p1][0])
 
 
 def main():
