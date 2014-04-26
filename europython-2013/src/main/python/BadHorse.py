@@ -15,8 +15,61 @@ getcontext().prec = 10
 sys.setrecursionlimit(1500)
 
 
+def Zsolve_one(f):
+    print("-------------------------")
+    N = f.readint()
+
+    def solve_rec(thug_tuples, group_1, group_2):
+        # print(thug_tuples, group_1, group_2, sep="\n")
+        if not thug_tuples:  # empty
+            return group_1.isdisjoint(group_2)
+
+        t, o = thug_tuples[0]
+        if t in group_1 and o in group_1:
+            return False
+        elif t in group_2 and o in group_2:
+            return False
+        elif t in group_1:
+            return solve_rec(thug_tuples[1:], group_1, group_2 | {o})
+        elif t in group_2:
+            return solve_rec(thug_tuples[1:], group_1 | {o}, group_2)
+        else:
+            return solve_rec(thug_tuples[1:], group_1 | {t}, group_2 | {o}) or solve_rec(thug_tuples[1:], group_1 | {o}, group_2 | {t})
+
+    thugs = []
+    for n in range(N):
+        thugs += [tuple(f.readwords())]
+
+    return "Yes" if solve_rec(thugs[1:], {thugs[0][0]}, {thugs[0][1]}) else "No"
+
+
 def solve_one(f):
-    return ""
+    print("-------------------------")
+    N = f.readint()
+
+    def solve_rec(thug_tuples, group_1, group_2):
+        if not thug_tuples:  # empty
+            return group_1.isdisjoint(group_2)
+
+        t, l = thug_tuples[0]
+        if t in group_1 and not group_1.isdisjoint(l):
+            return False
+        elif t in group_2 and not group_2.isdisjoint(l):
+            return False
+        elif t in group_1:
+            return solve_rec(thug_tuples[1:], group_1, group_2 | l)
+        elif t in group_2:
+            return solve_rec(thug_tuples[1:], group_1 | l, group_2)
+        else:
+            return solve_rec(thug_tuples[1:], group_1 | {t}, group_2 | l) or solve_rec(thug_tuples[1:], group_1 | l, group_2 | {t})
+
+    thug_dict = defaultdict(set)
+    for n in range(N):
+        x, y = tuple(f.readwords())
+        thug_dict[x].add(y)
+        thug_dict[y].add(x)
+
+    return "Yes" if solve_rec(list(thug_dict.items()), set(), set()) else "No"
 
 
 def main():

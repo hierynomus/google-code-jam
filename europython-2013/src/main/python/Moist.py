@@ -16,7 +16,17 @@ sys.setrecursionlimit(1500)
 
 
 def solve_one(f):
-    return ""
+    cards = f.readgrid(f.readint(), f.readline)
+    cost = 0
+    print(cards)
+    for i in range(1, len(cards)):
+        j = next((n - 1 for n in range(i, 0, -1) if cards[i] < cards[n - 1]), i)
+        cost += i - j
+        card = cards[i]
+        cards.remove(card)
+        cards.insert(j, card)
+        i -= 1
+    return str(cost)
 
 
 def main():
@@ -49,7 +59,7 @@ def main():
                 expected_line = expected.readline()
                 if line.strip() != expected_line.strip():
                     correct = False
-                    print("Output [{}]\nExpected [{}]".format(line.strip(), expected_line.strip()))
+                    print("Output [{}]\nExpected [{}]".format(line, expected_line))
         if not correct:
             raise Exception("Did not validate")
 
