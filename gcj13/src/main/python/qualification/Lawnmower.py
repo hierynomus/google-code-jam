@@ -6,6 +6,7 @@ from collections import defaultdict
 from itertools import count
 import operator
 import getopt
+from pprint import pprint
 
 
 # Set precision high enough
@@ -16,7 +17,22 @@ sys.setrecursionlimit(1500)
 
 
 def solve_one(f):
-    return ""
+    N, M = f.readints()
+    lawn = f.readgrid(N, f.readints)
+    our_lawn = new_grid(N, M, 100)
+
+    for r in range(N):
+        max_length = max(lawn[r])
+        for c in range(M):
+            our_lawn[r][c] = max_length
+
+    for c in range(M):
+        max_length = max([lawn[r][c] for r in range(N)])
+        for r in range(N):
+            if our_lawn[r][c] > max_length:
+                our_lawn[r][c] = max_length
+
+    return "YES" if lawn == our_lawn else "NO"
 
 
 def main():
