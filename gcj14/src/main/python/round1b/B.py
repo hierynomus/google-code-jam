@@ -16,8 +16,6 @@ sys.setrecursionlimit(1500)
 
 
 def solve_one(f):
-    print(".", end="")
-
     return ""
 
 

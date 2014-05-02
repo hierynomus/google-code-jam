@@ -15,10 +15,53 @@ getcontext().prec = 10
 sys.setrecursionlimit(1500)
 
 
-def solve_one(f):
-    print(".", end="")
+def flip_switch(n, outlets):
+    mask = 1 << n
+    return map(lambda x: x ^ mask, outlets)
 
-    return ""
+
+def count_distance(outlets, devices, n):
+    mask = 1 << n
+    diff = 0
+    for o in range(len(outlets)):
+        diff += (outlets[o] & mask) - (devices[o] & mask)
+
+    return diff
+
+
+def as_bin(l):
+    return list(map(lambda x: bin(x), l))
+
+
+def good_mask(mask, outputs, devices):
+    return sorted(map(lambda o: o ^ mask, outputs)) == devices
+
+
+def bitCount(int_type):
+    count = 0
+    while(int_type):
+        int_type &= int_type - 1
+        count += 1
+    return(count)
+
+
+def solve_one(f):
+    N, L = f.readints()
+    O = sorted(map(lambda x: int(x, 2), f.readwords()))
+    D = sorted(map(lambda x: int(x, 2), f.readwords()))
+
+    masks = map(lambda x: x ^ O[0], D)
+
+    good_masks = [m for m in masks if good_mask(m, O, D)]
+
+    if good_masks:
+        sgm = sorted(map(lambda m: bitCount(m), good_masks))
+        print(sgm)
+        return str(sgm[0])
+    else:
+        return "NOT POSSIBLE"
+
+min_s = 0
 
 
 def main():
@@ -54,17 +97,6 @@ def main():
                     print("Output [{}]\nExpected [{}]".format(line.strip(), expected_line.strip()))
         if not correct:
             raise Exception("Did not validate")
-
-
-def new_grid(rows, cols, value):
-    return [([value] * cols) for i in range(rows)]
-
-
-def transpose_grid(grid):
-    """
-    Transposes a grid (ie. switches the rows and the columns)
-    """
-    return list(zip(*grid))
 
 
 def fold(f, l, a):

@@ -15,71 +15,8 @@ getcontext().prec = 10
 sys.setrecursionlimit(1500)
 
 
-def flip_switch(n, outlets):
-    mask = 1 << n
-    return map(lambda x: x ^ mask, outlets)
-
-
-def count_distance(outlets, devices, n):
-    mask = 1 << n
-    diff = 0
-    for o in range(len(outlets)):
-        diff += (outlets[o] & mask) - (devices[o] & mask)
-
-    return diff
-
-
-def as_bin(l):
-    return list(map(lambda x: bin(x), l))
-
-min_s = 0
-
-
 def solve_one(f):
-    global min_s
-    N, L = f.readints()
-    O = sorted(map(lambda x: int(x, 2), f.readwords()))
-    D = sorted(map(lambda x: int(x, 2), f.readwords()))
-    min_s = L
-
-    # print(as_bin(O), as_bin(D), sep="\n")
-
-    def solve(outlets, devices, n, s):
-        global min_s
-        if s >= min_s:
-            return min_s
-        if outlets == devices:
-            min_s = s
-            return s
-        elif n < 0:
-            return L + 1
-
-        diff = count_distance(outlets, devices, n)
-        new_outlets = sorted(flip_switch(n, outlets))
-        new_diff = count_distance(new_outlets, devices, n)
-
-        if diff == 0 and new_diff == 0:
-            switches = solve(outlets, devices, n-1, s)
-            if (min_s > switches):
-                min_s = switches
-            return min(switches, solve(new_outlets, devices, n-1, s+1))
-        elif new_diff == 0:
-            # print("-----")
-            # print(as_bin(new_outlets), as_bin(devices), sep="\n")
-            switches = solve(new_outlets, devices, n-1, s+1)
-            if (min_s > switches):
-                min_s = switches
-            return switches
-        elif diff == 0:
-            switches = solve(outlets, devices, n-1, s)
-            if (min_s > switches):
-                min_s = switches
-            return switches
-        else:
-            return L + 1
-
-    sol = solve(O, D, L, 0)
-    return "NOT POSSIBLE" if sol == L + 1 else str(sol)
+    return ""
 
 
 def main():
@@ -100,7 +37,6 @@ def main():
 
         for t in range(1, T + 1):
             res = solve_one(f)
-            print(".", end="")
             of.write_case(t)
             of.write_string(res)
             of.write_case_end()
@@ -116,6 +52,17 @@ def main():
                     print("Output [{}]\nExpected [{}]".format(line.strip(), expected_line.strip()))
         if not correct:
             raise Exception("Did not validate")
+
+
+def new_grid(rows, cols, value):
+    return [([value] * cols) for i in range(rows)]
+
+
+def transpose_grid(grid):
+    """
+    Transposes a grid (ie. switches the rows and the columns)
+    """
+    return list(zip(*grid))
 
 
 def fold(f, l, a):
