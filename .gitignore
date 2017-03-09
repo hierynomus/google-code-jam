@@ -20,3 +20,6 @@ out/
 build/
 .gradle/
 *.zip
+
+*.pyc
+__pycache__/
